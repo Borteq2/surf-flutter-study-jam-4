@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:surf_practice_magic_ball/api_client.dart';
 
 class MagicBallScreen extends StatelessWidget {
   const MagicBallScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    ApiClient apiClient = ApiClient();
+
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
@@ -14,19 +17,37 @@ class MagicBallScreen extends StatelessWidget {
             end: Alignment.bottomCenter,
           ),
         ),
-        child: const Column(
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  _BallWidget(),
-                  _UnderballLightWidget(),
+                  GestureDetector(
+                      onTap: () => apiClient.getSimpleResponse(),
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          Image.asset('lib/assets/ball.png'),
+                          Image.asset('lib/assets/small_star.png'),
+                          Image.asset('lib/assets/star.png'),
+                        ],
+                      )),
+                  Align(
+                    alignment: Alignment.center,
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        Image.asset('lib/assets/big_ellipse.png'),
+                        Image.asset('lib/assets/small_ellipse.png'),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
-            Padding(
+            const Padding(
               padding: EdgeInsets.only(bottom: 32),
               child: Text(
                 'Нажмите на шар\nили потрясите телефон',
@@ -46,37 +67,3 @@ class MagicBallScreen extends StatelessWidget {
   }
 }
 
-
-class _UnderballLightWidget extends StatelessWidget {
-  const _UnderballLightWidget();
-
-  @override
-  Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.center,
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          Image.asset('lib/assets/big_ellipse.png'),
-          Image.asset('lib/assets/small_ellipse.png'),
-        ],
-      ),
-    );
-  }
-}
-
-class _BallWidget extends StatelessWidget {
-  const _BallWidget();
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        Image.asset('lib/assets/ball.png'),
-        Image.asset('lib/assets/small_star.png'),
-        Image.asset('lib/assets/star.png'),
-      ],
-    );
-  }
-}
