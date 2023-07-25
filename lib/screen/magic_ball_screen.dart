@@ -10,6 +10,7 @@ class MagicBallScreen extends StatefulWidget {
 
 class _MagicBallScreenState extends State<MagicBallScreen> {
   bool waitingResponse = false;
+  String responseText = '';
 
   @override
   Widget build(BuildContext context) {
@@ -35,12 +36,13 @@ class _MagicBallScreenState extends State<MagicBallScreen> {
                     onTap: () async {
                       setState(() {
                         waitingResponse = true;
+                        responseText = ''; // Reset responseText when starting a new request.
                       });
 
-                      await apiClient.getSimpleResponse();
-
+                      final response = await apiClient.getSimpleResponse();
                       setState(() {
-                        waitingResponse = false;
+                        responseText = response; // Update responseText with the result.
+                        // waitingResponse = false;
                       });
                     },
                     child: Stack(
@@ -62,6 +64,25 @@ class _MagicBallScreenState extends State<MagicBallScreen> {
                           opacity: waitingResponse ? 1.0 : 0.0,
                           child: Image.asset('lib/assets/black_ball.png'),
                         ),
+                        AnimatedOpacity(
+                          duration: const Duration(milliseconds: 400),
+                          opacity: responseText.isNotEmpty ? 1.0 : 0.0,
+                          child: Container(
+                            width: 300,
+                            child: Text(
+                              responseText,
+                              textAlign: TextAlign.center,
+                              softWrap: true,
+                              maxLines: 2,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.w400,
+                                fontSize: 32,
+                                fontFamily: 'Gill_Sans',
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -75,6 +96,7 @@ class _MagicBallScreenState extends State<MagicBallScreen> {
                       ],
                     ),
                   ),
+
                 ],
               ),
             ),
@@ -97,3 +119,4 @@ class _MagicBallScreenState extends State<MagicBallScreen> {
     );
   }
 }
+
