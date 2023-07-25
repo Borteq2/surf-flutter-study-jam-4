@@ -32,28 +32,33 @@ class _MagicBallScreenState extends State<MagicBallScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   GestureDetector(
-                    onTap: () {
+                    onTap: () async {
                       setState(() {
-                        waitingResponse = !waitingResponse;
+                        waitingResponse = true;
                       });
-                      apiClient.getSimpleResponse();
+
+                      await apiClient.getSimpleResponse();
+
+                      setState(() {
+                        waitingResponse = false;
+                      });
                     },
                     child: Stack(
                       alignment: Alignment.center,
                       children: [
                         Image.asset('lib/assets/ball.png'),
                         AnimatedOpacity(
-                          duration: const Duration(milliseconds: 500),
+                          duration: const Duration(milliseconds: 600),
                           opacity: waitingResponse ? 0.0 : 1.0,
                           child: Image.asset('lib/assets/small_star.png'),
                         ),
                         AnimatedOpacity(
-                          duration: const Duration(milliseconds: 500),
+                          duration: const Duration(milliseconds: 600),
                           opacity: waitingResponse ? 0.0 : 1.0,
                           child: Image.asset('lib/assets/star.png'),
                         ),
                         AnimatedOpacity(
-                          duration: const Duration(milliseconds: 500),
+                          duration: const Duration(milliseconds: 400),
                           opacity: waitingResponse ? 1.0 : 0.0,
                           child: Image.asset('lib/assets/black_ball.png'),
                         ),
@@ -92,5 +97,3 @@ class _MagicBallScreenState extends State<MagicBallScreen> {
     );
   }
 }
-
-
