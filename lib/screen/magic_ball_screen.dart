@@ -15,26 +15,37 @@ class MagicBallScreen extends StatelessWidget {
           ),
         ),
         child: const Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            _BallWidget(),
-            _UnderballLightWidget(),
-            SizedBox(height: 40),
-            Text(
-              'Нажмите на шар\nили потрясите телефон',
-              textAlign: TextAlign.center,
-              style: TextStyle(
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  _BallWidget(),
+                  _UnderballLightWidget(),
+                ],
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(bottom: 32),
+              child: Text(
+                'Нажмите на шар\nили потрясите телефон',
+                textAlign: TextAlign.center,
+                style: TextStyle(
                   fontWeight: FontWeight.w400,
                   fontSize: 16,
                   fontFamily: 'Gill_Sans',
-                  color: Color(0xFF727272)),
-            )
+                  color: Color(0xFF727272),
+                ),
+              ),
+            ),
           ],
         ),
       ),
     );
   }
 }
+
 
 class _UnderballLightWidget extends StatelessWidget {
   const _UnderballLightWidget();
