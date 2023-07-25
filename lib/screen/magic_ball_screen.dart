@@ -5,6 +5,67 @@ class MagicBallScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Color(0xFF100C2C), Color(0xFF000002)],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: const Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            _BallWidget(),
+            _UnderballLightWidget(),
+            SizedBox(height: 40),
+            Text(
+              'Нажмите на шар\nили потрясите телефон',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontWeight: FontWeight.w400,
+                  fontSize: 16,
+                  fontFamily: 'Gill_Sans',
+                  color: Color(0xFF727272)),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _UnderballLightWidget extends StatelessWidget {
+  const _UnderballLightWidget();
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: Alignment.center,
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          Image.asset('lib/assets/big_ellipse.png'),
+          Image.asset('lib/assets/small_ellipse.png'),
+        ],
+      ),
+    );
+  }
+}
+
+class _BallWidget extends StatelessWidget {
+  const _BallWidget();
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        Image.asset('lib/assets/ball.png'),
+        Image.asset('lib/assets/small_star.png'),
+        Image.asset('lib/assets/star.png'),
+      ],
+    );
   }
 }

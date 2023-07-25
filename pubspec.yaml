@@ -6,20 +6,25 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: 3.0.3 # Dart SDK version
-  flutter: 3.10.3 # Flutter SDK version
+  sdk: ^3.0.3 # Dart SDK version
+  flutter: ^3.10.3 # Flutter SDK version
 
 dependencies:
   flutter:
     sdk: flutter
-
   cupertino_icons: ^1.0.2
+  flutter_svg:
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
   flutter_lints: ^2.0.1
-flutter:
 
+flutter:
   uses-material-design: true
+  assets:
+    - lib/assets/
+  fonts:
+    - family: Gill Sans
+      fonts:
+        - asset: lib/assets/fonts/Gill_Sans.ttf
